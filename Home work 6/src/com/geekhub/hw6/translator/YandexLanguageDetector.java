@@ -1,6 +1,5 @@
 package com.geekhub.hw6.translator;
 
-import com.geekhub.hw6.translator.core.TranslatorException;
 import com.geekhub.hw6.translator.core.language.Language;
 import com.geekhub.hw6.translator.core.language.LanguageDetector;
 import com.geekhub.hw6.translator.core.language.LanguageDetectorException;
@@ -24,20 +23,20 @@ public class YandexLanguageDetector implements LanguageDetector {
 
     @Override
     public Language detect(String text) throws LanguageDetectorException {
-        URL url = null;
+        URL url;
         try {
             url = new URL(String.format(YANDEX_LANGUAGE_DETECTOR_API_URL, apiKey, text));
         } catch (MalformedURLException e) {
-            new LanguageDetectorException(e);
+            throw new LanguageDetectorException(e);
         }
 
-        Language language = null;
+        Language language;
         try {
             language = Language.find(EncodingUtils.encode(IOUtils.toString(url.openStream()), "lang"));
         } catch (IOException e) {
-            new TranslatorException(e);
+            throw new LanguageDetectorException(e);
         } catch (UnknownLanguageException e) {
-            new TranslatorException(e);
+            throw new LanguageDetectorException(e);
         }
         return language;
     }

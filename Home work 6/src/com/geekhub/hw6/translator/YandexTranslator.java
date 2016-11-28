@@ -28,30 +28,30 @@ public class YandexTranslator implements Translator {
 
     @Override
     public Translation translate(TranslationRequest translationRequest) throws TranslatorException {
-        String fullURL = null;
+        String fullURL;
         try {
             fullURL = String.format(YANDEX_TRANSLATOR_API_URL, apiKey,
                     translationRequest.getText(),
                     prepareLanguageDirection(languageDetector.detect(translationRequest.getText()), translationRequest.getTargetLanguage()));
         } catch (LanguageDetectorException e) {
-            new TranslatorException(e);
+            throw new TranslatorException(e);
         }
-        URL url = null;
+        URL url;
         try {
             url = new URL(fullURL);
         } catch (MalformedURLException e) {
-            new TranslatorException(e);
+            throw new TranslatorException(e);
         }
         Translation translation;
         String originalText = translationRequest.getText();
-        Language originalLanguage = null;
-        String translatedText = null;
+        Language originalLanguage;
+        String translatedText;
         Language targetLanguage = translationRequest.getTargetLanguage();
 
         try {
             originalLanguage = languageDetector.detect(translationRequest.getText());
         } catch (LanguageDetectorException e) {
-            new TranslatorException(e);
+            throw new TranslatorException(e);
         }
 
         if (originalLanguage.equals(targetLanguage)) {
@@ -60,7 +60,7 @@ public class YandexTranslator implements Translator {
             try {
                 translatedText = EncodingUtils.encode(IOUtils.toString(url.openStream()), "text");
             } catch (IOException e) {
-                new TranslatorException(e);
+                throw new TranslatorException(e);
             }
         }
 
