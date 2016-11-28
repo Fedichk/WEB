@@ -42,17 +42,16 @@ public class YandexTranslator implements Translator {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        Translation khdsdjk = null;
+        Translation translation = null;
         try {
-            khdsdjk = new Translation(translationRequest.getText(), languageDetector.detect(translationRequest.getText()), EncodingUtils.encode(IOUtils.toString(url.openStream()), "text"), translationRequest.getTargetLanguage());
+            translation = new Translation(translationRequest.getText(), languageDetector.detect(translationRequest.getText()), EncodingUtils.encode(IOUtils.toString(url.openStream()), "text"), translationRequest.getTargetLanguage());
         } catch (LanguageDetectorException e) {
             System.out.println("Something went wrong during translating");
         } catch (IOException e) {
             e.printStackTrace();
         }
-//l;fsdjhklsdfghdfjklhsdfjklhfgjklhsdfklsdkdfhkdfhgjklfhjk
 
-        return khdsdjk;
+        return translation;
     }
 
     private String prepareLanguageDirection(Language from, Language to) {
