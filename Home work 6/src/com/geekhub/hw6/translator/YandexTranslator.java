@@ -50,7 +50,7 @@ public class YandexTranslator implements Translator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+//l;fsdjhklsdfghdfjklhsdfjklhfgjklhsdfklsdkdfhkdfhgjklfhjk
 
         return translation;
     }
