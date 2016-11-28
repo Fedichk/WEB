@@ -37,6 +37,7 @@ public class YandexLanguageDetector implements LanguageDetector {
         } catch (IOException e) {
             new TranslatorException(e);
         } catch (UnknownLanguageException e) {
+            new TranslatorException(e);
         }
         return language;
     }
