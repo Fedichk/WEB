@@ -11,7 +11,6 @@ import com.geekhub.hw6.translator.util.EncodingUtils;
 import com.geekhub.hw6.translator.util.IOUtils;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class YandexTranslator implements Translator {
@@ -28,24 +27,10 @@ public class YandexTranslator implements Translator {
 
     @Override
     public Translation translate(TranslationRequest translationRequest) throws TranslatorException {
-        String fullURL;
-        try {
-            fullURL = String.format(YANDEX_TRANSLATOR_API_URL, apiKey,
-                    translationRequest.getText(),
-                    prepareLanguageDirection(languageDetector.detect(translationRequest.getText()), translationRequest.getTargetLanguage()));
-        } catch (LanguageDetectorException e) {
-            throw new TranslatorException(e);
-        }
-        URL url;
-        try {
-            url = new URL(fullURL);
-        } catch (MalformedURLException e) {
-            throw new TranslatorException(e);
-        }
         Translation translation;
         String originalText = translationRequest.getText();
         Language originalLanguage;
-        String translatedText;
+        String translatedText = null;
         Language targetLanguage = translationRequest.getTargetLanguage();
 
         try {
@@ -58,14 +43,13 @@ public class YandexTranslator implements Translator {
             translatedText = originalText;
         } else {
             try {
-                translatedText = EncodingUtils.encode(IOUtils.toString(url.openStream()), "text");
-            } catch (IOException e) {
+                translatedText = EncodingUtils.encode(IOUtils.toString(new URL (String.format(YANDEX_TRANSLATOR_API_URL, apiKey, translationRequest.getText(),
+                        prepareLanguageDirection(languageDetector.detect(originalText), targetLanguage))).openStream()), "text");
+            } catch (IOException | LanguageDetectorException e) {
                 throw new TranslatorException(e);
             }
         }
-
         translation = new Translation(originalText, originalLanguage, translatedText, targetLanguage);
-
         return translation;
     }
 

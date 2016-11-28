@@ -8,7 +8,6 @@ import com.geekhub.hw6.translator.util.EncodingUtils;
 import com.geekhub.hw6.translator.util.IOUtils;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class YandexLanguageDetector implements LanguageDetector {
@@ -23,21 +22,11 @@ public class YandexLanguageDetector implements LanguageDetector {
 
     @Override
     public Language detect(String text) throws LanguageDetectorException {
-        URL url;
-        try {
-            url = new URL(String.format(YANDEX_LANGUAGE_DETECTOR_API_URL, apiKey, text));
-        } catch (MalformedURLException e) {
-            throw new LanguageDetectorException(e);
-        }
 
-        Language language;
         try {
-            language = Language.find(EncodingUtils.encode(IOUtils.toString(url.openStream()), "lang"));
-        } catch (IOException e) {
-            throw new LanguageDetectorException(e);
-        } catch (UnknownLanguageException e) {
+            return Language.find(EncodingUtils.encode(IOUtils.toString(new URL(String.format(YANDEX_LANGUAGE_DETECTOR_API_URL, apiKey, text)).openStream()), "lang"));
+        } catch (IOException | UnknownLanguageException e) {
             throw new LanguageDetectorException(e);
         }
-        return language;
     }
 }
