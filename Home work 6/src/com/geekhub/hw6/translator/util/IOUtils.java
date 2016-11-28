@@ -1,5 +1,7 @@
 package com.geekhub.hw6.translator.util;
 
+import com.geekhub.hw6.translator.core.TranslatorException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,8 +23,8 @@ public class IOUtils {
                 }
             }
         } catch (IOException e) {
+            new TranslatorException(e);
         }
         return String.valueOf(content);
-
     }
 }
