@@ -1,6 +1,6 @@
 package com.geekhub.hw6.carsort;
 
-public class Car implements Comparable <Car> {
+public class Car implements Comparable<Car> {
     String name;
     int price;
 
@@ -19,16 +19,16 @@ public class Car implements Comparable <Car> {
 
     @Override
     public int compareTo(Car obj) {
-            Car entry = obj;
-            int result = name.compareTo(entry.name);
-            if(result != 0) {
-                return result;
-            }
-            result = price - entry.price;
-            if(result != 0) {
-                return (int) result / Math.abs( result );
-            }
-            return 0;
+        Car entry = obj;
+        int result = name.compareTo(entry.name);
+        if (result != 0) {
+            return result;
+        }
+        result = price - entry.price;
+        if (result != 0) {
+            return (int) result / Math.abs(result);
+        }
+        return 0;
     }
 }
 

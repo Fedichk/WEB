@@ -2,7 +2,9 @@ package com.geekhub.hw6.sorter;
 
 public interface ArraySorter {
 
-        Comparable[] sort(Comparable[] elements, Direction direction);
+    static Comparable[] sort(Comparable[] elements, Direction direction) {
+        return new Comparable[0];
+    }
 
 }
 

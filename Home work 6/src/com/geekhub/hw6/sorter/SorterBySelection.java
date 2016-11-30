@@ -1,30 +1,31 @@
 package com.geekhub.hw6.sorter;
 
 public class SorterBySelection implements ArraySorter {
-    @Override
-    public Comparable[] sort(Comparable[] elements, Direction direction) {
 
-        if (direction == Direction.ASC){
-            for (int a = 1; a < elements.length; a++) {
-                for (int b = 0; b < elements.length - a; b++) {
-                    if (((elements[b]).compareTo((elements[b + 1]))) > 0) {
+    public static Comparable[] sort(Comparable[] elements, Direction direction) {
+
+        if (direction == Direction.ASC) {
+            for (int a = 0; a < elements.length - 1; a++) {
+                for (int b = a + 1; b < elements.length; b++) {
+                    if (((elements[b]).compareTo((elements[a]))) < 0) {
                         Comparable temp = elements[b];
-                        elements[b] = elements[b + 1];
-                        elements[b + 1] = temp;
-                    }
-                }
-            }
-            }if(direction == Direction.DESC){
-            for (int a = 1; a < elements.length; a++) {
-                for (int b = 0; b < elements.length - a; b++) {
-                    if (((elements[b]).compareTo((elements[b + 1]))) < 0) {
-                        Comparable temp = elements[b];
-                        elements[b] = elements[b + 1];
-                        elements[b + 1] = temp;
+                        elements[b] = elements[a];
+                        elements[a] = temp;
                     }
                 }
             }
         }
-  return elements;
+        if (direction == Direction.DESC) {
+            for (int a = 0; a < elements.length - 1; a++) {
+                for (int b = a + 1; b < elements.length; b++) {
+                    if (((elements[b]).compareTo((elements[a]))) > 0) {
+                        Comparable temp = elements[b];
+                        elements[b] = elements[a];
+                        elements[a] = temp;
+                    }
+                }
+            }
+        }
+        return elements;
     }
 }
