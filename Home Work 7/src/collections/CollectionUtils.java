@@ -8,13 +8,13 @@ import java.util.function.Predicate;
 
 public class CollectionUtils {
 
-    private CollectionUtils() {
+     CollectionUtils() {
     }
 
     public static <E> List<E> filter(List<E> elements, Predicate<E> filter) {
-        List<E> result = null;
+        List<E> result = new ArrayList<>();
         for (E element : elements) {
-            if (!filter.equals(element)) {
+            if (filter.test(element)) {
                 result.add(element);
             }
         }
@@ -23,7 +23,7 @@ public class CollectionUtils {
 
     public static <E> boolean anyMatch(List<E> elements, Predicate<E> predicate) {
         for (E element : elements) {
-            if (predicate.equals(element)) {
+            if (predicate.test(element)) {
                 return true;
             }
         }
@@ -32,7 +32,7 @@ public class CollectionUtils {
 
     public static <E> boolean allMatch(List<E> elements, Predicate<E> predicate) {
         for (E element : elements) {
-            if (!predicate.equals(element)) {
+            if (!predicate.test(element)) {
                 return false;
             }
         }
@@ -40,11 +40,11 @@ public class CollectionUtils {
     }
 
     public static <E> boolean noneMatch(List<E> elements, Predicate<E> predicate) {
-        return !allMatch(elements, predicate);
+        return !anyMatch(elements, predicate);
     }
 
     public static <T, R extends Function<T, R>> List<R> map(List<T> elements, Function<T, R> mappingFunction) {
-        List<R> result = null;
+        List<R> result = new ArrayList<>();
         for (T element : elements) {
             result.add(mappingFunction.apply(element));
         }
@@ -92,7 +92,7 @@ public class CollectionUtils {
     }
 
     public static <E> Map<Boolean, List<E>> partitionBy(List<E> elements, Predicate<E> predicate) {
-        Map<Boolean, List<E>> result = null;
+        Map<Boolean, List<E>> result = new HashMap<>();
         List<E> isTrue = null;
         List<E> isFalse = null;
         for (E element : elements) {
@@ -108,7 +108,7 @@ public class CollectionUtils {
     }
 
     public static <T, K> Map<K, List<T>> groupBy(List<T> elements, Function<T, K> classifier) {
-        Map<K, List<T>> result = null;
+        Map<K, List<T>> result = new HashMap<>();
         for (T element : elements) {
             K type = classifier.apply(element);
             List<T> obj = result.computeIfAbsent(type, k -> new ArrayList<>());
