@@ -12,22 +12,17 @@ public class CollectionUtils {
     }
 
     public static <E> List<E> filter(List<E> elements, Predicate<E> filter) {
-        List<E> result = elements;
-        ListIterator<E> iterator = result.listIterator();
-        while (iterator.hasNext()) {
-            final E element = iterator.next();
+        List<E> result = null;
+        for (E element : elements) {
             if (!filter.equals(element)) {
-                iterator.remove();
+                result.add(element);
             }
         }
-
         return result;
     }
 
     public static <E> boolean anyMatch(List<E> elements, Predicate<E> predicate) {
-    ListIterator<E> iterator = elements.listIterator();
-        for(int i = 0; iterator.hasNext(); i++) {
-            final E element = iterator.next();
+        for (E element : elements) {
             if (predicate.equals(element)) {
                 return true;
             }
@@ -36,9 +31,7 @@ public class CollectionUtils {
     }
 
     public static <E> boolean allMatch(List<E> elements, Predicate<E> predicate) {
-        ListIterator<E> iterator = elements.listIterator();
-            while (iterator.hasNext()) {
-                final E element = iterator.next();
+        for (E element : elements){
                 if (!predicate.equals(element)) {
                     return false;
                 }
@@ -47,18 +40,15 @@ public class CollectionUtils {
     }
 
     public static <E> boolean noneMatch(List<E> elements, Predicate<E> predicate) {
-        ListIterator<E> iterator = elements.listIterator();
-        for(int i = 0; iterator.hasNext(); i++) {
-            final E element = iterator.next();
-            if (predicate.equals(element)) {
-                return false;
-            }
+        if(allMatch(elements, predicate) == true){
+            return false;
         }
         return true;
     }
 
     public static <T, R> List<R> map(List<T> elements, Function<T, R> mappingFunction) {
         //TODO Implement me
+
         return null;
     }
 
