@@ -92,13 +92,29 @@ public class CollectionUtils {
     }
 
     public static <E> Map<Boolean, List<E>> partitionBy(List<E> elements, Predicate<E> predicate) {
-        //TODO Implement me
-        return null;
+        Map<Boolean, List<E>> result = null;
+        List <E> isTrue = null;
+        List <E> isFalse = null;
+        for (E element : elements){
+            if (elements.equals(predicate)){
+                isTrue.add(element);
+            }else{
+                isFalse.add(element);
+            }
+        }
+        result.put(true, isTrue);
+        result.put(false, isFalse);
+        return result;
     }
 
     public static <T, K> Map<K, List<T>> groupBy(List<T> elements, Function<T, K> classifier) {
-        //TODO Implement me
-        return null;
+        Map<K, List<T>> result = null;
+        for (T element : elements) {
+            K type = classifier.apply(element);
+            List<T> obj = result.computeIfAbsent(type, k -> new ArrayList<>());
+            obj.add(element);
+        }
+        return result;
     }
 
     public static <T, K, U> Map<K, U> toMap(List<T> elements,
