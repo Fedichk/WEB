@@ -52,15 +52,23 @@ public class CollectionUtils {
     }
 
     public static <E> Optional<E> max(List<E> elements, Comparator<E> comparator) {
+        E max = elements.get(0);
         for (E element : elements) {
-
+            if (comparator.compare(max, element) < 0) {
+                max = element;
+            }
         }
-        return null;
+        return Optional.of(max);
     }
 
     public static <E> Optional<E> min(List<E> elements, Comparator<E> comparator) {
-        //TODO Implement me
-        return null;
+        E min = elements.get(0);
+        for (E element : elements) {
+            if (comparator.compare(min, element) >= 0) {
+                min = element;
+            }
+        }
+        return Optional.of(min);
     }
 
     public static <E> List<E> distinct(List<E> elements) {
