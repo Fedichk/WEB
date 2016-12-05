@@ -93,12 +93,12 @@ public class CollectionUtils {
 
     public static <E> Map<Boolean, List<E>> partitionBy(List<E> elements, Predicate<E> predicate) {
         Map<Boolean, List<E>> result = null;
-        List <E> isTrue = null;
-        List <E> isFalse = null;
-        for (E element : elements){
-            if (elements.equals(predicate)){
+        List<E> isTrue = null;
+        List<E> isFalse = null;
+        for (E element : elements) {
+            if (elements.equals(predicate)) {
                 isTrue.add(element);
-            }else{
+            } else {
                 isFalse.add(element);
             }
         }
