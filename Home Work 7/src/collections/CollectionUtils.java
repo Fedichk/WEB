@@ -31,29 +31,30 @@ public class CollectionUtils {
     }
 
     public static <E> boolean allMatch(List<E> elements, Predicate<E> predicate) {
-        for (E element : elements){
-                if (!predicate.equals(element)) {
-                    return false;
-                }
+        for (E element : elements) {
+            if (!predicate.equals(element)) {
+                return false;
             }
-        return true;
-    }
-
-    public static <E> boolean noneMatch(List<E> elements, Predicate<E> predicate) {
-        if(allMatch(elements, predicate) == true){
-            return false;
         }
         return true;
     }
 
-    public static <T, R> List<R> map(List<T> elements, Function<T, R> mappingFunction) {
-        //TODO Implement me
+    public static <E> boolean noneMatch(List<E> elements, Predicate<E> predicate) {
+        return !allMatch(elements, predicate);
+    }
 
-        return null;
+    public static <T, R extends Function<T, R>> List<R> map(List<T> elements, Function<T, R> mappingFunction) {
+        List<R> result = null;
+        for (T element : elements) {
+            result.add(mappingFunction.apply(element));
+        }
+        return result;
     }
 
     public static <E> Optional<E> max(List<E> elements, Comparator<E> comparator) {
-        //TODO Implement me
+        for (E element : elements) {
+
+        }
         return null;
     }
 
@@ -63,12 +64,13 @@ public class CollectionUtils {
     }
 
     public static <E> List<E> distinct(List<E> elements) {
-        //TODO Implement me
-        return null;
+        return new ArrayList<>(new HashSet<>(elements));
     }
 
     public static <E> void forEach(List<E> elements, Consumer<E> consumer) {
-        //TODO Implement me
+        for (E element : elements) {
+            consumer.accept(element);
+        }
     }
 
     public static <E> Optional<E> reduce(List<E> elements, BinaryOperator<E> accumulator) {
