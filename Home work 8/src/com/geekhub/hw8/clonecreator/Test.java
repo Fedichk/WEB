@@ -8,7 +8,6 @@ public class Test {
         Car clon = (Car) cloning(car);
         System.out.println(clon.getModel());
         System.out.println(clon.getType());
-
     }
 
     private static Object cloning(Object obj) throws IllegalAccessException, InstantiationException {
@@ -21,7 +20,4 @@ public class Test {
         }
         return clone;
     }
-
 }
-
-
