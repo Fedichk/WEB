@@ -4,6 +4,7 @@ public class Human {
 
     private int height;
     private String gender;
+    @Ignore
     private int age;
     private int weight;
 

@@ -2,6 +2,7 @@ package com.geekhub.hw8.beanrepresenter;
 
 public class Car {
 
+    @Ignore
     private String color;
     private int maxSpeed;
     private String type;
