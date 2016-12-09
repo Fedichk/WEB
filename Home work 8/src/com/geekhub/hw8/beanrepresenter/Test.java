@@ -14,7 +14,7 @@ public class Test {
         getInformation(human);
     }
 
-    static void getInformation(Object obj) throws IllegalAccessException {
+    private static void getInformation(Object obj) throws IllegalAccessException {
         Class objClass = obj.getClass();
         Field[] objFields = objClass.getDeclaredFields();
         System.out.println(objClass.getName());
