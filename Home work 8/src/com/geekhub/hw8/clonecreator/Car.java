@@ -8,9 +8,10 @@ class Car {
     private String color;
     private int maxSpeed;
 
-    Car(){
+    Car() {
 
     }
+
     Car(int maxCount, String model, String type, String color, int maxSpeed) {
         this.maxCount = maxCount;
         this.model = model;

@@ -10,7 +10,8 @@ public class Test {
         System.out.println(clon.getType());
 
     }
-    private static Object cloning (Object obj) throws IllegalAccessException, InstantiationException {
+
+    private static Object cloning(Object obj) throws IllegalAccessException, InstantiationException {
         Class objClass = obj.getClass();
         Object clone = objClass.newInstance();
         Field[] objFields = objClass.getDeclaredFields();
