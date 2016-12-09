@@ -9,36 +9,20 @@ public class Test {
         Car car = new Car("black", 190, "SUV", "RX-7");
         Human human = new Human(180, "male", 22, 75);
 
-        Class catClass = cat.getClass();
-        Class carClass = Car.class;
-        Class humanClass = Human.class;
+        getInformation(cat);
+        getInformation(car);
+        getInformation(human);
 
-        Field[] catFields = catClass.getDeclaredFields();
-        Field[] carFields = carClass.getDeclaredFields();
-        Field[] humanFields = humanClass.getDeclaredFields();
+    }
 
-        System.out.println(catClass.getName());
-        for (Field field : catFields) {
-            if (field.isAnnotationPresent(Ignore.class)) {
-            } else {
+    static void getInformation (Object obj) throws IllegalAccessException {
+        Class objClass = obj.getClass();
+        Field[] obfFields = objClass.getDeclaredFields();
+        System.out.println(objClass.getName());
+        for (Field field : obfFields) {
+            if (!field.isAnnotationPresent(Ignore.class)) {
                 field.setAccessible(true);
-                System.out.println(field.getName() + " " + field.get(cat));
-            }
-        }
-        System.out.println(carClass.getName());
-        for (Field field : carFields) {
-            if (field.isAnnotationPresent(Ignore.class)) {
-            } else {
-                field.setAccessible(true);
-                System.out.println(field.getName() + " " + field.get(car));
-            }
-        }
-        System.out.println(humanClass.getName());
-        for (Field field : humanFields) {
-            if (field.isAnnotationPresent(Ignore.class)) {
-            } else {
-                field.setAccessible(true);
-                System.out.println(field.getName() + " " + field.get(human));
+                System.out.println(field.getName() + " " + field.get(obj));
             }
         }
     }
