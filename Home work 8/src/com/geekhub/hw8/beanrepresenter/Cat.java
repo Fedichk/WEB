@@ -1,6 +1,6 @@
 package com.geekhub.hw8.beanrepresenter;
 
-public class Cat {
+class Cat {
 
     private String color;
     @Ignore
@@ -8,12 +8,12 @@ public class Cat {
     private int legCount;
     private int furLength;
 
-    public Cat(String color, int age, int legCount, int furLength) {
+    Cat(String color, int age, int legCount, int furLength) {
         this.color = color;
         this.age = age;
         this.legCount = legCount;
         this.furLength = furLength;
-   }
+    }
 
     public String getColor() {
         return color;

@@ -1,6 +1,6 @@
 package com.geekhub.hw8.beanrepresenter;
 
-public class Car {
+class Car {
 
     @Ignore
     private String color;
@@ -8,7 +8,7 @@ public class Car {
     private String type;
     private String model;
 
-    public Car(String color, int maxSpeed, String type, String model) {
+    Car(String color, int maxSpeed, String type, String model) {
         this.color = color;
         this.maxSpeed = maxSpeed;
         this.type = type;

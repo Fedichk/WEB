@@ -12,10 +12,9 @@ public class Test {
         getInformation(cat);
         getInformation(car);
         getInformation(human);
-
     }
 
-    static void getInformation (Object obj) throws IllegalAccessException {
+    static void getInformation(Object obj) throws IllegalAccessException {
         Class objClass = obj.getClass();
         Field[] obfFields = objClass.getDeclaredFields();
         System.out.println(objClass.getName());
