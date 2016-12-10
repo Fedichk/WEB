@@ -17,7 +17,7 @@ public class Test {
     private static void getInformation(Object obj) throws IllegalAccessException {
         Class objClass = obj.getClass();
         Field[] objFields = objClass.getDeclaredFields();
-        System.out.println(objClass.getName());
+        System.out.println(objClass.getSimpleName());
         for (Field field : objFields) {
             if (!field.isAnnotationPresent(Ignore.class)) {
                 field.setAccessible(true);
