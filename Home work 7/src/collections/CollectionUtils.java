@@ -96,7 +96,7 @@ public class CollectionUtils {
         List<E> isTrue = null;
         List<E> isFalse = null;
         for (E element : elements) {
-            if (elements.equals(predicate)) {
+            if (predicate.test(element)) {
                 isTrue.add(element);
             } else {
                 isFalse.add(element);

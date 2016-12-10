@@ -1,4 +1,4 @@
-package com.geekhub.hw7.list;
+package com.geekhub.hw8.list;
 
 public interface LinkedList<E> extends Iterable<E> {
 
