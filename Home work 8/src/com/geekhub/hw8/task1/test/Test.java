@@ -29,14 +29,14 @@ public class Test {
         cat.getPaws().put("back-right", new Paw(22, Color.GRAY));
 
         Cat cat1 = new Cat();
-        cat.setColor(Color.BLACK);
-        cat.setAge(2);
-        cat.setName("Tam");
+        cat1.setColor(Color.BLACK);
+        cat1.setAge(2);
+        cat1.setName("Tam");
 
         Cat cat2 = new Cat();
-        cat.setColor(Color.RED);
-        cat.setAge(5);
-        cat.setName("Tim");
+        cat2.setColor(Color.RED);
+        cat2.setAge(5);
+        cat2.setName("Tim");
 
 
 
