@@ -84,6 +84,8 @@ public class JsonSerializaer {
                     UseDataAdapter useDataAdapter = field.getAnnotation(UseDataAdapter.class);
                     JsonDataAdapter adapter = useDataAdapter.value().newInstance();
                     jsonObj.put(field.getName(), adapter.toJson(field.get(o)));
+                }else{
+                    jsonObj.put(field.getName(), field.get(o));
                 }
             }
         }
