@@ -34,6 +34,10 @@ public class Cat {
     @UseDataAdapter(MapAdapter.class)
     private Map<String, Paw> paws = new HashMap<>();
 
+    @UseDataAdapter(CollectionAdapter.class)
+    private List<Cat> children = new ArrayList<>();
+
+
     public Cat() {
         myself = this;
     }
@@ -56,6 +60,10 @@ public class Cat {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public void setChildren(List<Cat> children) {
+        this.children = children;
     }
 
     public void setBirthDate(LocalDate birthDate) {
