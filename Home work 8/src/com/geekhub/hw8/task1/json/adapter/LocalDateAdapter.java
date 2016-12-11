@@ -9,7 +9,6 @@ public class LocalDateAdapter implements JsonDataAdapter<LocalDate> {
 
     @Override
     public Object toJson(LocalDate date) {
-        //implement me
-        return null;
+        return date;
     }
 }

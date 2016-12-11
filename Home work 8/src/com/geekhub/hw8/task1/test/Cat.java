@@ -1,8 +1,7 @@
 package com.geekhub.hw8.task1.test;
 
-import com.geekhub.hw8.task1.json.adapter.ColorAdapter;
-import com.geekhub.hw8.task1.json.adapter.MapAdapter;
-import com.geekhub.hw8.task1.json.adapter.UseDataAdapter;
+import com.geekhub.hw8.task1.json.Ignore;
+import com.geekhub.hw8.task1.json.adapter.*;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -16,15 +15,20 @@ import java.util.Map;
  */
 public class Cat {
 
+    @Ignore
     private int age;
+    @Ignore
     private String name;
+    @Ignore
     private Cat myself;
 
+    @UseDataAdapter(LocalDateAdapter.class)
     private LocalDate birthDate;
 
     @UseDataAdapter(ColorAdapter.class)
     private Color color;
 
+    @UseDataAdapter(CollectionAdapter.class)
     private List<Integer> whiskers = new ArrayList<>();
 
     @UseDataAdapter(MapAdapter.class)

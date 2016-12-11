@@ -11,6 +11,6 @@ public class CollectionAdapter implements JsonDataAdapter<Collection> {
 
     @Override
     public Object toJson(Collection c) throws JSONException{
-        return toJson(c);
+        return c;
     }
 }

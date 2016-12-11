@@ -1,5 +1,7 @@
 package com.geekhub.hw8.task1.json;
 
+import com.geekhub.hw8.task1.json.adapter.JsonDataAdapter;
+import com.geekhub.hw8.task1.json.adapter.UseDataAdapter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -72,15 +74,17 @@ public class JsonSerializaer {
      * @throws InstantiationException
      */
     private static JSONObject toJsonObject(Object o) throws Exception {
-        //implement me
-        JSONObject jsonObj = null;
+        JSONObject jsonObj = new JSONObject();
         Class objClass = o.getClass();
         Field[] objFields = objClass.getDeclaredFields();
-        System.out.println(objClass.getName());
         for (Field field : objFields) {
             if (!field.isAnnotationPresent(Ignore.class)) {
-                field.setAccessible(true);
-                jsonObj = new JSONObject(o);
+                if (field.isAnnotationPresent(UseDataAdapter.class)){
+                    field.setAccessible(true);
+                    UseDataAdapter useDataAdapter = field.getAnnotation(UseDataAdapter.class);
+                    JsonDataAdapter adapter = useDataAdapter.value().newInstance();
+                    jsonObj.put(field.getName(), adapter.toJson(field.get(o)));
+                }
             }
         }
         return jsonObj;

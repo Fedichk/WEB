@@ -1,10 +1,10 @@
 package com.geekhub.hw8.task1.test;
 
-import com.geekhub.hw8.task1.json.JsonSerializaer;
+        import com.geekhub.hw8.task1.json.JsonSerializaer;
 
-import java.awt.*;
-import java.time.LocalDate;
-import java.util.List;
+        import java.awt.*;
+        import java.time.LocalDate;
+        import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws IllegalAccessException {
