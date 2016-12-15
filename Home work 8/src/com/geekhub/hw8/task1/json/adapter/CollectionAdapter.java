@@ -14,7 +14,7 @@ public class CollectionAdapter implements JsonDataAdapter<Collection> {
     @Override
     public Object toJson(Collection c) throws JSONException{
         JSONArray collection = new JSONArray();
-        for (Object o : collection) {
+        for (Object o : c) {
             collection.put(JsonSerializaer.serialize(o));
         }
         return collection;
