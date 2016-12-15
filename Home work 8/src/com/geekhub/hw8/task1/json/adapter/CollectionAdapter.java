@@ -12,7 +12,7 @@ import java.util.Collection;
 public class CollectionAdapter implements JsonDataAdapter<Collection> {
 
     @Override
-    public Object toJson(Collection c) throws JSONException{
+    public Object toJson(Collection c) throws JSONException {
         JSONArray collection = new JSONArray();
         for (Object o : c) {
             collection.put(JsonSerializaer.serialize(o));

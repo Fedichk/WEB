@@ -40,7 +40,7 @@ public class Test {
         cat2.setName("Tim");
         cat2.setBirthDate(LocalDate.now());
 
-        List <Cat> ch = new ArrayList<>();
+        List<Cat> ch = new ArrayList<>();
         ch.add(cat1);
         ch.add(cat2);
 

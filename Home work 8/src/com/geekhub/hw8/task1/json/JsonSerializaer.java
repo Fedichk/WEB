@@ -80,11 +80,11 @@ public class JsonSerializaer {
         for (Field field : objFields) {
             field.setAccessible(true);
             if (!field.isAnnotationPresent(Ignore.class)) {
-                if (field.isAnnotationPresent(UseDataAdapter.class)){
+                if (field.isAnnotationPresent(UseDataAdapter.class)) {
                     UseDataAdapter useDataAdapter = field.getAnnotation(UseDataAdapter.class);
                     JsonDataAdapter adapter = useDataAdapter.value().newInstance();
                     jsonObj.put(field.getName(), adapter.toJson(field.get(o)));
-                }else{
+                } else {
                     jsonObj.put(field.getName(), serialize(field.get(o)));
                 }
             }
