@@ -32,13 +32,13 @@ public class Test {
         cat1.setColor(Color.BLACK);
         cat1.setAge(2);
         cat1.setName("Tam");
+        cat1.setBirthDate(LocalDate.now());
 
         Cat cat2 = new Cat();
         cat2.setColor(Color.RED);
         cat2.setAge(5);
         cat2.setName("Tim");
-
-
+        cat2.setBirthDate(LocalDate.now());
 
         List <Cat> ch = new ArrayList<>();
         ch.add(cat1);

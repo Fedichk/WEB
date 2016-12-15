@@ -78,9 +78,9 @@ public class JsonSerializaer {
         Class objClass = o.getClass();
         Field[] objFields = objClass.getDeclaredFields();
         for (Field field : objFields) {
+            field.setAccessible(true);
             if (!field.isAnnotationPresent(Ignore.class)) {
                 if (field.isAnnotationPresent(UseDataAdapter.class)){
-                    field.setAccessible(true);
                     UseDataAdapter useDataAdapter = field.getAnnotation(UseDataAdapter.class);
                     JsonDataAdapter adapter = useDataAdapter.value().newInstance();
                     jsonObj.put(field.getName(), adapter.toJson(field.get(o)));
