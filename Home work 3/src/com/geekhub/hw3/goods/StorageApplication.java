@@ -3,9 +3,6 @@ package com.geekhub.hw3.goods;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * Created by Fedich on 06.11.2016.
- */
 public class StorageApplication {
     public static void main(String[] args) {
 
