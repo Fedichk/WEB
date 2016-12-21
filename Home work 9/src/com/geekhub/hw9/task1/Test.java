@@ -6,11 +6,12 @@ import com.geekhub.hw9.task1.storage.DatabaseStorage;
 import com.geekhub.hw9.task1.storage.Storage;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        Connection connection = null; //TODO: Initialize me
+        Connection connection = createConnection( "sa", "", "jdbc:h2:~/test");
 
         Storage storage = new DatabaseStorage(connection);
         List<Cat> cats = storage.list(Cat.class);
@@ -56,7 +57,7 @@ public class Test {
     }
 
     private static Connection createConnection(String login, String password, String dbName) throws Exception {
-        //TODO: Implement me
-        return null;
+        Class.forName("org.h2.Driver");
+        return DriverManager.getConnection(dbName,login,password);
     }
 }
