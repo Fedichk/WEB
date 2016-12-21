@@ -2,10 +2,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
-/**
- * Created by Fedich on 21.10.2016.
- */
-
 public class PhoneNumber {
 
     public static void main(String[] args) {
