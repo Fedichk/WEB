@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        Connection connection = createConnection( "sa", "", "jdbc:h2:~/test");
+        Connection connection = createConnection( "root", "12345", "jdbc:mysql://localhost:3306/geekhub?autoReconnect=true&useSSL=false");
 
         Storage storage = new DatabaseStorage(connection);
         List<Cat> cats = storage.list(Cat.class);
@@ -57,7 +57,6 @@ public class Test {
     }
 
     private static Connection createConnection(String login, String password, String dbName) throws Exception {
-        Class.forName("org.h2.Driver");
         return DriverManager.getConnection(dbName,login,password);
     }
 }
