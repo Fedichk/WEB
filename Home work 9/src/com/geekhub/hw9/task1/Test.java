@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        Connection connection = createConnection( "root", "12345", "jdbc:mysql://localhost:3306/geekhub?autoReconnect=true&useSSL=false");
+        Connection connection = createConnection("root", "12345", "geekhub");
 
         Storage storage = new DatabaseStorage(connection);
         List<Cat> cats = storage.list(Cat.class);
@@ -21,7 +21,7 @@ public class Test {
         cats = storage.list(Cat.class);
         if (!cats.isEmpty()) throw new Exception("Cats should not be in database!");
 
-        for(int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 20; i++) {
             Cat cat = new Cat();
             cat.setName("cat" + i);
             cat.setAge(i);
@@ -57,6 +57,8 @@ public class Test {
     }
 
     private static Connection createConnection(String login, String password, String dbName) throws Exception {
-        return DriverManager.getConnection(dbName,login,password);
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbName + "?autoReconnect=true&useSSL=false",
+                login,
+                password);
     }
 }
