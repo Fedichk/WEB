@@ -50,8 +50,12 @@ public class DatabaseStorage implements Storage {
 
     @Override
     public <T extends Entity> boolean delete(T entity) throws StorageException {
-        //TODO: Implement me
-        return false;
+        String sql = "DELETE FROM " + entity.getClass().getSimpleName().toLowerCase() + " WHERE id = " + entity.getId();
+        try (Statement statement = connection.createStatement()) {
+            return (statement.executeUpdate(sql) == 1);
+        } catch (Exception e) {
+            throw new StorageException(e);
+        }
     }
 
     @Override

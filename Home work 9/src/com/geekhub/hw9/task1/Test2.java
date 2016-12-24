@@ -30,9 +30,18 @@ public class Test2 {
         Storage storage = new DatabaseStorage(conn);
         List<Cat> cats = storage.list(Cat.class);
         for (Cat cat : cats) {
-            System.out.println(cat.getName() + " " + cat.getAge());
+            System.out.println(cat.getId() + " " + cat.getName() + " " + cat.getAge());
         }
 
 
+            storage.delete(cats.get(5));
+
+        List<Cat> catss = storage.list(Cat.class);
+        for (Cat cat : catss) {
+            System.out.println(cat.getId() + " " + cat.getName() + " " + cat.getAge());
+        }
+
+
+        conn.close();
     }
 }
