@@ -1,10 +1,13 @@
 package com.geekhub.hw9.task1.storage;
 
 import com.geekhub.hw9.task1.objects.Entity;
+import com.geekhub.hw9.task1.objects.Ignore;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +40,14 @@ public class DatabaseStorage implements Storage {
 
     @Override
     public <T extends Entity> List<T> list(Class<T> clazz) throws StorageException {
-        //TODO: Implement me
-        return null;
+        List<T> result = null;
+        String sql = "SELECT * FROM " + clazz.getSimpleName().toLowerCase();
+        try (Statement statement = connection.createStatement()) {
+            result = extractResult(clazz, statement.executeQuery(sql));
+        } catch (Exception e) {
+            throw new StorageException(e);
+        }
+        return result;
     }
 
     @Override
@@ -60,7 +69,18 @@ public class DatabaseStorage implements Storage {
 
     //creates list of new instances of clazz by using data from resultset
     private <T extends Entity> List<T> extractResult(Class<T> clazz, ResultSet resultSet) throws Exception {
-        //TODO: Implement me
-        return null;
+        List<T> result = new ArrayList<>();
+        while (resultSet.next()) {
+            Object obj = clazz.newInstance();
+            Field[] fields = clazz.getDeclaredFields();
+            for (int i = 1; i <= fields.length; i++) {
+                fields[i].setAccessible(true);
+                if (!fields[i].isAnnotationPresent(Ignore.class)) {
+                    fields[i].set(obj, resultSet.getObject(i));
+                }
+            }
+            result.add((T) obj);
+        }
+        return result;
     }
 }
