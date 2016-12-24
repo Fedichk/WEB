@@ -40,14 +40,12 @@ public class DatabaseStorage implements Storage {
 
     @Override
     public <T extends Entity> List<T> list(Class<T> clazz) throws StorageException {
-        List<T> result = null;
         String sql = "SELECT * FROM " + clazz.getSimpleName().toLowerCase();
         try (Statement statement = connection.createStatement()) {
-            result = extractResult(clazz, statement.executeQuery(sql));
+            return extractResult(clazz, statement.executeQuery(sql));
         } catch (Exception e) {
             throw new StorageException(e);
         }
-        return result;
     }
 
     @Override
@@ -71,15 +69,16 @@ public class DatabaseStorage implements Storage {
     private <T extends Entity> List<T> extractResult(Class<T> clazz, ResultSet resultSet) throws Exception {
         List<T> result = new ArrayList<>();
         while (resultSet.next()) {
-            Object obj = clazz.newInstance();
+            T object = (T) clazz.newInstance();
             Field[] fields = clazz.getDeclaredFields();
-            for (int i = 1; i <= fields.length; i++) {
+            object.setId(resultSet.getInt(1));
+            for (int i = 0; i < fields.length; i++) {
                 fields[i].setAccessible(true);
                 if (!fields[i].isAnnotationPresent(Ignore.class)) {
-                    fields[i].set(obj, resultSet.getObject(i));
+                    fields[i].set(object, resultSet.getObject(i+2));
                 }
             }
-            result.add((T) obj);
+            result.add(object);
         }
         return result;
     }

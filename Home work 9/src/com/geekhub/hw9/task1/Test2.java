@@ -1,8 +1,15 @@
 package com.geekhub.hw9.task1;
 
+import com.geekhub.hw9.task1.objects.Cat;
+import com.geekhub.hw9.task1.objects.Entity;
+import com.geekhub.hw9.task1.storage.DatabaseStorage;
+import com.geekhub.hw9.task1.storage.Storage;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLOutput;
 import java.sql.Statement;
+import java.util.List;
 
 public class Test2 {
     public static void main(String[] args) throws Exception {
@@ -19,6 +26,13 @@ public class Test2 {
 //        try(Statement stmt = conn.createStatement()) {
 //            stmt.executeUpdate(book);
 //        }
+
+        Storage storage = new DatabaseStorage(conn);
+        List<Cat> cats = storage.list(Cat.class);
+        for (Cat cat : cats) {
+            System.out.println(cat.getName() + " " + cat.getAge());
+        }
+
 
     }
 }
