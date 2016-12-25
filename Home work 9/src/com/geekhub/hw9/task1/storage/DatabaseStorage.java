@@ -111,17 +111,13 @@ public class DatabaseStorage implements Storage {
     }
 
     //converts object to map, could be helpful in save method
-    private <T extends Entity> Map<String, Object> prepareEntity(T entity) {
+    private <T extends Entity> Map<String, Object> prepareEntity(T entity) throws IllegalAccessException {
         Map<String, Object> result = new LinkedHashMap<>();
         Field[] fields = entity.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
             if (!field.isAnnotationPresent(Ignore.class)) {
-                try {
-                    result.put(field.getName(), field.get(entity));
-                } catch (IllegalAccessException e) {
-                    new StorageException(e);
-                }
+                result.put(field.getName(), field.get(entity));
             }
         }
         return result;
