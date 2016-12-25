@@ -56,11 +56,7 @@ public class Test {
 //        JOIN city ci
 //        ON r.id = ci.region_id
 //        GROUP BY c.id
-//        ORDER BY sum_of_citys DESC, sum_of_regions DESC
-
-
-
-
+//        ORDER BY sum_of_citys DESC, sum_of_regions DESC, c.name
     }
 }
 
