@@ -5,8 +5,12 @@ import java.time.LocalDate;
 public class User extends Entity {
 
     private String name;
+
+    @Ignore
     private Integer age;
     private Boolean admin;
+
+    @Ignore
     private Double balance;
 
     @Ignore

@@ -5,11 +5,10 @@ import com.geekhub.hw9.task1.objects.Ignore;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Implementation of {@link Storage} that uses database as a storage for objects.
@@ -60,13 +59,72 @@ public class DatabaseStorage implements Storage {
 
     @Override
     public <T extends Entity> void save(T entity) throws StorageException {
-        //TODO: Implement me
+        if (entity.isNew()) {
+            try {
+                Collection values = prepareEntity(entity).values();
+                StringBuilder preparedString = new StringBuilder();
+                for (Object value : values) {
+                    preparedString.append("?, ");
+                }
+                preparedString.delete(preparedString.length() - 2, preparedString.length());
+                String sql = String.format("INSERT INTO %s VALUES (default, %s)",
+                        entity.getClass().getSimpleName().toLowerCase(),
+                        preparedString.toString());
+                try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    int i = 1;
+                    for (Object value : values) {
+                        ps.setObject(i++, value);
+                    }
+                    ps.executeUpdate();
+                    ResultSet generatedKeys = ps.getGeneratedKeys();
+                    generatedKeys.next();
+                    entity.setId(generatedKeys.getInt(1));
+                }
+            } catch (Exception e) {
+                throw new StorageException(e);
+            }
+        } else {
+            try {
+                Collection values = prepareEntity(entity).values();
+                Set keys = prepareEntity(entity).keySet();
+                StringBuilder preparedString = new StringBuilder();
+                for (Object key : keys) {
+                    preparedString.append(key);
+                    preparedString.append(" = ?, ");
+                }
+                preparedString.delete(preparedString.length() - 2, preparedString.length());
+                String sql = String.format("UPDATE %s SET %s WHERE id = %d",
+                        entity.getClass().getSimpleName().toLowerCase(),
+                        preparedString.toString(),
+                        entity.getId());
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                    int i = 1;
+                    for (Object value : values) {
+                        ps.setObject(i++, value);
+                    }
+                    ps.executeUpdate();
+                }
+            } catch (Exception e) {
+                throw new StorageException(e);
+            }
+        }
     }
 
     //converts object to map, could be helpful in save method
     private <T extends Entity> Map<String, Object> prepareEntity(T entity) {
-        //TODO: Implement me
-        return null;
+        Map<String, Object> result = new LinkedHashMap<>();
+        Field[] fields = entity.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (!field.isAnnotationPresent(Ignore.class)) {
+                try {
+                    result.put(field.getName(), field.get(entity));
+                } catch (IllegalAccessException e) {
+                    new StorageException(e);
+                }
+            }
+        }
+        return result;
     }
 
     //creates list of new instances of clazz by using data from resultset
@@ -76,10 +134,11 @@ public class DatabaseStorage implements Storage {
             T object = (T) clazz.newInstance();
             Field[] fields = clazz.getDeclaredFields();
             object.setId(resultSet.getInt(1));
-            for (int i = 0; i < fields.length; i++) {
-                fields[i].setAccessible(true);
-                if (!fields[i].isAnnotationPresent(Ignore.class)) {
-                    fields[i].set(object, resultSet.getObject(i+2));
+            int i = 2;
+            for (Field field : fields) {
+                field.setAccessible(true);
+                if (!field.isAnnotationPresent(Ignore.class)) {
+                    field.set(object, resultSet.getObject(i++));
                 }
             }
             result.add(object);
