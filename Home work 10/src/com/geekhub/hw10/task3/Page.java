@@ -3,6 +3,7 @@ package com.geekhub.hw10.task3;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,11 +26,13 @@ public class Page {
      * @throws java.io.IOException
      */
     public Page(URL url) throws IOException {
-        //TODO: Implement me
+        this.url = url;
+        this.content = new String(ConnectionUtils.getData(url));
     }
 
     /**
-     * Extracts all links to images from the page like <img src={link}/>. Method does not cache content. Each time new list will be returned.
+     * Extracts all links to images from the page like <img src={link}/>. Method does not cache content.
+     * Each time new list will be returned.
      *
      * @return list of URLs to images from that page.
      * @throws java.net.MalformedURLException
@@ -39,7 +42,17 @@ public class Page {
     }
 
     private Collection<URL> extractMatches(Matcher matcher) throws MalformedURLException {
-        //TODO: Implement me
-        return null;
+        ArrayList<URL> listOfUrls = new ArrayList<>();
+
+        while (matcher.find()) {
+            try {
+                String match = matcher.group();
+                if (!match.startsWith("<img src=\\\"data")) {
+                    listOfUrls.add(new URL(match.replaceFirst("<img src=\"", "http://trinixy.ru").replaceAll("\"(.*)", "")));
+                }
+            } catch (MalformedURLException e) {
+            }
+        }
+        return listOfUrls;
     }
 }

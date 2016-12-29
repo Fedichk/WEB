@@ -1,5 +1,7 @@
 package com.geekhub.hw10.task3;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 
@@ -17,7 +19,14 @@ public class ConnectionUtils {
      * @throws java.io.IOException
      */
     public static byte[] getData(URL url) throws IOException {
-        //TODO: Implement me
-        return null;
+        byte[] buffer = new byte[1024];
+        try (BufferedInputStream in = new BufferedInputStream(url.openStream());
+             ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            int data;
+            while ((data = in.read(buffer)) > 0) {
+                out.write(buffer, 0, data);
+            }
+            return out.toByteArray();
+        }
     }
 }

@@ -30,7 +30,13 @@ public class ImageCrawler {
      * @throws java.io.IOException
      */
     public void downloadImages(String urlToPage) throws IOException {
-        //TODO: Implement me
+        Page page = new Page(new URL(urlToPage));
+        for (URL url : page.getImageLinks()) {
+            if (isImageURL(url)) {
+                executorService.execute(new ImageTask(url, folder));
+            }
+        }
+
         // You must use executorService to submit task for download
     }
 

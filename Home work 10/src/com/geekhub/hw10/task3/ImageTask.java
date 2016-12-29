@@ -1,6 +1,9 @@
 package com.geekhub.hw10.task3;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Represents worker that downloads image from URL to specified folder.<br/>
@@ -21,7 +24,16 @@ public class ImageTask implements Runnable {
      */
     @Override
     public void run() {
-        //TODO: Implement me
+//        try(FileOutputStream out = new FileOutputStream(folder + "/" + buildFileName(url))){
+//            out.write(ConnectionUtils.getData(url), 0, ConnectionUtils.getData(url).length);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        try {
+            Files.write(Paths.get(folder + "/" + buildFileName(url)), ConnectionUtils.getData(url));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //converts URL to unique file name
