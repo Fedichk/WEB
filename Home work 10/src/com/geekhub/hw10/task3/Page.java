@@ -48,7 +48,9 @@ public class Page {
             try {
                 String match = matcher.group();
                 if (!match.startsWith("<img src=\\\"data")) {
-                    listOfUrls.add(new URL(match.replaceFirst("<img src=\"", "http://trinixy.ru").replaceAll("\"(.*)", "")));
+                    listOfUrls.add(new URL(match.
+                            replaceFirst("<img src=\"", url.getProtocol() + "://" + url.getHost()).
+                            replaceAll("\"(.*)", "")));
                 }
             } catch (MalformedURLException e) {
             }
