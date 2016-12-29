@@ -43,7 +43,6 @@ public class Page {
 
     private Collection<URL> extractMatches(Matcher matcher) throws MalformedURLException {
         ArrayList<URL> listOfUrls = new ArrayList<>();
-
         while (matcher.find()) {
             try {
                 String match = matcher.group();
