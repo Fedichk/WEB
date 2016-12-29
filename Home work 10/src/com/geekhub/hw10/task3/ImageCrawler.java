@@ -36,7 +36,6 @@ public class ImageCrawler {
                 executorService.execute(new ImageTask(url, folder));
             }
         }
-
         // You must use executorService to submit task for download
     }
 
