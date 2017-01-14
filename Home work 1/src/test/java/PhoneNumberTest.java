@@ -12,7 +12,6 @@ public class PhoneNumberTest {
     }
 
     @Test
-
     public void stringWithNumerics() throws Exception {
         Assert.assertEquals("10", calculator.calculate("+3-5/2"));
     }
