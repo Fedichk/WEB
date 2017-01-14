@@ -3,17 +3,18 @@ import org.junit.Test;
 
 public class PhoneNumberTest {
 
-    CalculatedService cal = new CalculatedService();
+    CalculatedService calculator = new CalculatedService();
     PhoneNumberValidator validator = new PhoneNumberValidator();
 
     @Test
     public void stringWithOutNumerics() throws Exception {
-        Assert.assertEquals("0", cal.calculate("Hello!!!"));
+        Assert.assertEquals("0", calculator.calculate("Hello!!!"));
     }
 
     @Test
+
     public void stringWithNumerics() throws Exception {
-        Assert.assertEquals("10", cal.calculate("+3-5/2"));
+        Assert.assertEquals("10", calculator.calculate("+3-5/2"));
     }
 
     @Test
