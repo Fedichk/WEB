@@ -52,7 +52,7 @@ public interface Storage {
     /**
      * Deletes object in table.
      *
-     * @param clazz that class table will be deleted.
+     * @param clazz table of this class will be deleted.
      * @param <T>
      * @return quantity of deleted rows in table.
      * @throws StorageException
