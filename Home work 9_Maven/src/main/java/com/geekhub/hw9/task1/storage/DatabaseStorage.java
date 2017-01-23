@@ -141,4 +141,14 @@ public class DatabaseStorage implements Storage {
         }
         return result;
     }
+
+    @Override
+    public <T extends Entity> int delete(Class<T> clazz) throws StorageException {
+        String sql = "DELETE FROM " + clazz.getSimpleName().toLowerCase();
+        try (Statement statement = connection.createStatement()) {
+            return (statement.executeUpdate(sql));
+        } catch (Exception e) {
+            throw new StorageException(e);
+        }
+    }
 }

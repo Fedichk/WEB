@@ -25,7 +25,7 @@ public class DatabaseStorageTest {
     public void createTable() throws Exception {
         Connection conn = createConn();
         String test = "CREATE TABLE cat" +
-                "(ID INT PRIMARY KEY NOT NULL," +
+                "(ID INT AUTO_INCREMENT PRIMARY KEY NOT NULL," +
                 "NAME VARCHAR NOT NULL," +
                 "AGE INT NOT NULL)";
 
@@ -73,10 +73,49 @@ public class DatabaseStorageTest {
     }
 
     @Test
-    public void listIsEmptyFromEmptyBaseTest() throws Exception {
+    public void listIsEmptyFromEmptyTableTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
-        Assert.assertEquals(true, base.list(Cat.class).isEmpty());
+        base.delete(Cat.class);
+        Assert.assertTrue(base.list(Cat.class).isEmpty());
+    }
+
+    @Test
+    public void deleteAllRowsTableTest() throws Exception{
+        Storage base = new DatabaseStorage(createConn());
+        Assert.assertEquals(4, base.delete(Cat.class));
+        Assert.assertEquals(0, base.delete(Cat.class));
+    }
+
+    @Test
+    public void saveToBaseNewObjectTest() throws Exception{
+        Storage base = new DatabaseStorage(createConn());
+        Cat cat = new Cat();
+        cat.setName("Pushok");
+        cat.setAge(8);
+        base.save(cat);
+        Assert.assertEquals("Pushok", base.get(Cat.class, 5).getName());
+    }
+
+    @Test
+    public void updateBaseWithNewNameOfExistingObjectTest() throws Exception{
+        Storage base = new DatabaseStorage(createConn());
+        Cat cat = new Cat();
+        cat.setName("Puhlyachok");
+        cat.setId(4);
+        base.save(cat);
+        Assert.assertEquals("Puhlyachok", base.get(Cat.class, 4).getName());
+    }
+
+    @Test
+    public void deleteSimpleObjectFromBaseTest() throws Exception {
+        Storage base = new DatabaseStorage(createConn());
+        Cat cat = new Cat();
+        cat.setName("Jorik");
+        cat.setAge(7);
+        base.save(cat);
+        Assert.assertTrue(base.delete(cat));
     }
 
 
-}
+
+    }

@@ -33,7 +33,7 @@ public interface Storage {
     /**
      * Deletes object in storage.
      *
-     * @param entity that will be deleted
+     * @param entity that will be deleted.
      * @param <T>
      * @return true if object was deleted successfully, false otherwise.
      * @throws StorageException
@@ -48,4 +48,15 @@ public interface Storage {
      * @throws StorageException
      */
     <T extends Entity> void save(T entity) throws StorageException;
+
+    /**
+     * Deletes object in table.
+     *
+     * @param clazz that class table will be deleted.
+     * @param <T>
+     * @return quantity of deleted rows in table.
+     * @throws StorageException
+     */
+    <T extends Entity> int delete(Class<T> clazz) throws StorageException;
+
 }
