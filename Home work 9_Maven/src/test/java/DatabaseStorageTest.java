@@ -30,7 +30,9 @@ public class DatabaseStorageTest {
                 "AGE INT NOT NULL)";
 
         String insert = "INSERT INTO cat VALUES(1, 'Murka', 5);" +
-                "INSERT INTO cat VALUES(2, 'Barsik', 2);";
+                "INSERT INTO cat VALUES(2, 'Barsik', 2);" +
+                "INSERT INTO cat VALUES(3, 'Pushistik', 4);" +
+                "INSERT INTO cat VALUES(4, 'Tom', 1);";
 
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(test);
@@ -50,7 +52,7 @@ public class DatabaseStorageTest {
     }
 
     @Test
-    public void getExecetlyWhatWeWantTest() throws Exception {
+    public void getExactlyWhatWeWantTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
         Assert.assertEquals(Cat.class, base.get(Cat.class, 1).getClass());
         Assert.assertEquals("Murka", base.get(Cat.class, 1).getName());
@@ -58,9 +60,22 @@ public class DatabaseStorageTest {
     }
 
     @Test
-    public void getWhatIsNotExists() throws Exception {
+    public void getWhatIsNotExistsTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
         Assert.assertNull(base.get(Cat.class, 100));
+    }
+
+    @Test
+    public void listExactlyWhatWeWantTest() throws Exception {
+        Storage base = new DatabaseStorage(createConn());
+        Assert.assertEquals(4, base.list(Cat.class).size());
+        Assert.assertEquals("Tom", base.list(Cat.class).get(3).getName());
+    }
+
+    @Test
+    public void listIsEmptyFromEmptyBaseTest() throws Exception {
+        Storage base = new DatabaseStorage(createConn());
+        Assert.assertEquals(true, base.list(Cat.class).isEmpty());
     }
 
 
