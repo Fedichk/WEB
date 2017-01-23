@@ -80,14 +80,14 @@ public class DatabaseStorageTest {
     }
 
     @Test
-    public void deleteAllRowsTableTest() throws Exception{
+    public void deleteAllRowsTableTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
         Assert.assertEquals(4, base.delete(Cat.class));
         Assert.assertEquals(0, base.delete(Cat.class));
     }
 
     @Test
-    public void saveToBaseNewObjectTest() throws Exception{
+    public void saveToBaseNewObjectTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
         Cat cat = new Cat();
         cat.setName("Pushok");
@@ -97,7 +97,7 @@ public class DatabaseStorageTest {
     }
 
     @Test
-    public void updateBaseWithNewNameOfExistingObjectTest() throws Exception{
+    public void updateBaseWithNewNameOfExistingObjectTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
         Cat cat = new Cat();
         cat.setName("Puhlyachok");
@@ -115,7 +115,4 @@ public class DatabaseStorageTest {
         base.save(cat);
         Assert.assertTrue(base.delete(cat));
     }
-
-
-
-    }
+}
