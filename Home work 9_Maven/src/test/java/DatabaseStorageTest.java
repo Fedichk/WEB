@@ -2,13 +2,14 @@ import com.geekhub.hw9.task1.objects.Cat;
 import com.geekhub.hw9.task1.storage.DatabaseStorage;
 import com.geekhub.hw9.task1.storage.Storage;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+
+import static org.junit.Assert.*;
 
 public class DatabaseStorageTest {
 
@@ -54,36 +55,36 @@ public class DatabaseStorageTest {
     @Test
     public void getExactlyWhatWeWantTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
-        Assert.assertEquals(Cat.class, base.get(Cat.class, 1).getClass());
-        Assert.assertEquals("Murka", base.get(Cat.class, 1).getName());
-        Assert.assertEquals(5, base.get(Cat.class, 1).getAge());
+        assertEquals(Cat.class, base.get(Cat.class, 1).getClass());
+        assertEquals("Murka", base.get(Cat.class, 1).getName());
+        assertEquals(5, base.get(Cat.class, 1).getAge());
     }
 
     @Test
     public void getWhatIsNotExistsTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
-        Assert.assertNull(base.get(Cat.class, 100));
+        assertNull(base.get(Cat.class, 100));
     }
 
     @Test
     public void listExactlyWhatWeWantTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
-        Assert.assertEquals(4, base.list(Cat.class).size());
-        Assert.assertEquals("Tom", base.list(Cat.class).get(3).getName());
+        assertEquals(4, base.list(Cat.class).size());
+        assertEquals("Tom", base.list(Cat.class).get(3).getName());
     }
 
     @Test
     public void listIsEmptyFromEmptyTableTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
         base.delete(Cat.class);
-        Assert.assertTrue(base.list(Cat.class).isEmpty());
+        assertTrue(base.list(Cat.class).isEmpty());
     }
 
     @Test
     public void deleteAllRowsTableTest() throws Exception {
         Storage base = new DatabaseStorage(createConn());
-        Assert.assertEquals(4, base.delete(Cat.class));
-        Assert.assertEquals(0, base.delete(Cat.class));
+        assertEquals(4, base.delete(Cat.class));
+        assertEquals(0, base.delete(Cat.class));
     }
 
     @Test
@@ -93,7 +94,7 @@ public class DatabaseStorageTest {
         cat.setName("Pushok");
         cat.setAge(8);
         base.save(cat);
-        Assert.assertEquals("Pushok", base.get(Cat.class, 5).getName());
+        assertEquals("Pushok", base.get(Cat.class, 5).getName());
     }
 
     @Test
@@ -103,7 +104,7 @@ public class DatabaseStorageTest {
         cat.setName("Puhlyachok");
         cat.setId(4);
         base.save(cat);
-        Assert.assertEquals("Puhlyachok", base.get(Cat.class, 4).getName());
+        assertEquals("Puhlyachok", base.get(Cat.class, 4).getName());
     }
 
     @Test
@@ -113,6 +114,6 @@ public class DatabaseStorageTest {
         cat.setName("Jorik");
         cat.setAge(7);
         base.save(cat);
-        Assert.assertTrue(base.delete(cat));
+        assertTrue(base.delete(cat));
     }
 }
