@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.*;
 
 /**
  * Implementation of {@link Storage} that uses database as a storage for objects.
@@ -139,5 +140,15 @@ public class DatabaseStorage implements Storage {
             result.add(object);
         }
         return result;
+    }
+
+    @Override
+    public <T extends Entity> int delete(Class<T> clazz) throws StorageException {
+        String sql = "DELETE FROM " + clazz.getSimpleName().toLowerCase();
+        try (Statement statement = connection.createStatement()) {
+            return (statement.executeUpdate(sql));
+        } catch (Exception e) {
+            throw new StorageException(e);
+        }
     }
 }
