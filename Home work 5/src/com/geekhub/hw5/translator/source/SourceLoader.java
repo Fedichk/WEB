@@ -1,6 +1,5 @@
 package com.geekhub.hw5.translator.source;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

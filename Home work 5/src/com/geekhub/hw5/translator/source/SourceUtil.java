@@ -8,12 +8,10 @@ import java.io.InputStreamReader;
 public class SourceUtil {
     static String toString(InputStream in) throws SourceLoadingException {
         StringBuilder content = new StringBuilder();
-        try {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content.append(line);
-                }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line);
             }
         } catch (IOException e) {
             throw new SourceLoadingException(e);
