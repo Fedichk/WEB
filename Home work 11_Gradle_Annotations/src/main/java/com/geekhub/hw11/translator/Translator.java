@@ -23,10 +23,6 @@ public class Translator {
         this.urlSourceProvider = urlSourceProvider;
     }
 
-    public Translator()
-    {
-    }
-
     public String translate(String original) throws TranslateException, SourceLoadingException {
         try {
             return parseContent(urlSourceProvider.load(prepareURL(original)));
