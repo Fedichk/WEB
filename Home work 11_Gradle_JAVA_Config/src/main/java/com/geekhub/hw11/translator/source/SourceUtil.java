@@ -13,7 +13,7 @@ public class SourceUtil {
             while ((line = reader.readLine()) != null) {
                 content.append(line);
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new SourceLoadingException(e);
         }
         return String.valueOf(content);
