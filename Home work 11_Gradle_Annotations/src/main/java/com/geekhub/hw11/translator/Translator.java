@@ -15,7 +15,6 @@ public class Translator {
     @Value("${translator.apiKey}")
     private String yandexApiKey;
     private static final String TRANSLATION_DIRECTION = "ru";
-
     private URLSourceProvider urlSourceProvider;
 
     @Autowired
