@@ -9,9 +9,10 @@ import java.net.URLEncoder;
 
 public class Translator {
 
+    private static final String TRANSLATION_DIRECTION = "ru";
+
     @Value("${translator.apiKey}")
     private String yandexApiKey;
-    private static final String TRANSLATION_DIRECTION = "ru";
     private URLSourceProvider urlSourceProvider;
 
     public Translator(URLSourceProvider urlSourceProvider) {
