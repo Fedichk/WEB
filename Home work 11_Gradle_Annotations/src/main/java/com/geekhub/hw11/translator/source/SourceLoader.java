@@ -8,12 +8,8 @@ import java.util.List;
 @Component
 public class SourceLoader {
 
-    private List<SourceProvider> sourceProviders;
-
     @Autowired
-    public void setSourceProviders(List<SourceProvider> sourceProviders) {
-        this.sourceProviders = sourceProviders;
-    }
+    private List<SourceProvider> sourceProviders;
 
     public String loadSource(String pathToSource) throws SourceLoadingException {
         for (SourceProvider provider : sourceProviders) {

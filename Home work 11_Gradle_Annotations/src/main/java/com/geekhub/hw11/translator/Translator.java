@@ -16,12 +16,8 @@ public class Translator {
 
     @Value("${translator.apiKey}")
     private String yandexApiKey;
-    private URLSourceProvider urlSourceProvider;
-
     @Autowired
-    public void setUrlSourceProvider(URLSourceProvider urlSourceProvider) {
-        this.urlSourceProvider = urlSourceProvider;
-    }
+    private URLSourceProvider urlSourceProvider;
 
     public String translate(String original) throws TranslateException, SourceLoadingException {
         try {
