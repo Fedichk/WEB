@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan("com")
+@ComponentScan("com.geekhub.hw11.translator")
 @PropertySource("classpath:translator.properties")
 public class ApplicationConfiguration {
 }
