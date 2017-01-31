@@ -2,7 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
     <bean id="fileSourceProvider" class="com.geekhub.hw11.translator.source.FileSourceProvider"/>
     <bean id="urlSourceProvider" class="com.geekhub.hw11.translator.source.URLSourceProvider"/>
     <bean id="sourceLoader" class="com.geekhub.hw11.translator.source.SourceLoader">
@@ -16,5 +15,4 @@
     <bean id="translator" class="com.geekhub.hw11.translator.Translator">
         <constructor-arg ref="urlSourceProvider"/>
     </bean>
-
 </beans>

@@ -10,7 +10,6 @@ public class Translator {
 
     private static final String YANDEX_API_KEY = "trnsl.1.1.20131116T095927Z.86fe567e8de2cf44.5be1510f166cd444fdd9363db18bb3b5537bb7e9";
     private static final String TRANSLATION_DIRECTION = "ru";
-
     private URLSourceProvider urlSourceProvider;
 
     public Translator(URLSourceProvider urlSourceProvider)
