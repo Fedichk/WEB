@@ -1,6 +1,7 @@
 package com.geekhub.hw11.car;
 
 import com.geekhub.hw11.car.element.Wheel;
+import com.geekhub.hw11.car.element.WinterTyres;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,10 @@ import java.util.List;
 public class CarApplicationConfiguration {
 
     @Bean
-    public List<Wheel> listCreator(Wheel wheel) {
+    public List<Wheel> listCreator() {
         List<Wheel> list = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            list.add(wheel);
+            list.add(new Wheel(new WinterTyres()));
         }
         return list;
     }
