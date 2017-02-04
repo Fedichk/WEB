@@ -9,17 +9,19 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SourceUtil {
+public class TextHandlingUtil {
     public String toString(InputStream in, String args) throws SourceLoadingException {
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             String line;
-            Pattern pattern = Pattern.compile(args);
+            Pattern pattern = Pattern.compile(args.toLowerCase());
             while ((line = reader.readLine()) != null) {
                 Matcher matcher = pattern.matcher(line.toLowerCase());
                 if (matcher.find()) {
                     content.append(args).append(System.getProperty("line.separator"));
-                    content.append(line).append(System.getProperty("line.separator"));
+                    content.append(line.replace(args, "*" + args + "*")).
+                            append(System.getProperty("line.separator")
+                            );
                 }
             }
         } catch (IOException e) {
