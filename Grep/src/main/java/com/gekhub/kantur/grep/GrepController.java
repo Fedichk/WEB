@@ -15,8 +15,8 @@ public class GrepController {
                 new Help().printHelp(options);
             } else {
                 OptionsParser parser = new OptionsParser();
-                System.out.println(parser.argumentsParsing(commandLine).
-                        handling(parser.sourceParsing(commandLine)));
+                System.out.println(parser.argumentsParse(commandLine).
+                        handling(parser.sourceParse(commandLine)));
             }
         } catch (UnrecognizedOptionException e) {
             System.out.println("Please, insert correct parameter, or use help");
