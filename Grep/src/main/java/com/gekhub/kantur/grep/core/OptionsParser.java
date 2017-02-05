@@ -5,18 +5,17 @@ import com.gekhub.kantur.grep.core.handler.TextHandler;
 import com.gekhub.kantur.grep.core.handler.WordTextHandler;
 import com.gekhub.kantur.grep.core.source.FileSourceProvider;
 import com.gekhub.kantur.grep.core.source.SourceLoadingException;
+import com.gekhub.kantur.grep.core.source.SourceProvider;
 import com.gekhub.kantur.grep.core.source.URLSourceProvider;
 import org.apache.commons.cli.CommandLine;
 
-import java.io.InputStream;
-
 public class OptionsParser {
 
-    public InputStream sourceParse(CommandLine commandLine) throws SourceLoadingException {
+    public SourceProvider sourceParse(CommandLine commandLine) throws SourceLoadingException {
         if (commandLine.hasOption("f") || commandLine.hasOption("file")) {
-            return new FileSourceProvider().load(commandLine.getOptionValue("f"));
+            return new FileSourceProvider(commandLine.getOptionValue("f"));
         } else if (commandLine.hasOption("u") || commandLine.hasOption("url")) {
-            return new URLSourceProvider().load(commandLine.getOptionValue("u"));
+            return new URLSourceProvider(commandLine.getOptionValue("u"));
         }
         return null;
     }

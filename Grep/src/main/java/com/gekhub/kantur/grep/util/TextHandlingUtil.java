@@ -4,15 +4,14 @@ import com.gekhub.kantur.grep.core.source.SourceLoadingException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextHandlingUtil {
-    public String toString(InputStream in, String args) throws SourceLoadingException {
+    public String toString(String text, String args) throws SourceLoadingException {
         StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+        try (BufferedReader reader = new BufferedReader(new StringReader(text))) {
             String line;
             Pattern pattern = Pattern.compile(args.toLowerCase());
             while ((line = reader.readLine()) != null) {

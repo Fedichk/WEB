@@ -3,8 +3,6 @@ package com.gekhub.kantur.grep.core.handler;
 import com.gekhub.kantur.grep.core.source.SourceLoadingException;
 import com.gekhub.kantur.grep.util.TextHandlingUtil;
 
-import java.io.InputStream;
-
 public class WordTextHandler implements TextHandler {
 
     private String args;
@@ -14,7 +12,7 @@ public class WordTextHandler implements TextHandler {
     }
 
     @Override
-    public String handling(InputStream inputStream) throws SourceLoadingException {
-        return new TextHandlingUtil().toString(inputStream, args);
+    public String handling(String text) throws SourceLoadingException {
+        return new TextHandlingUtil().toString(text, args);
     }
 }
