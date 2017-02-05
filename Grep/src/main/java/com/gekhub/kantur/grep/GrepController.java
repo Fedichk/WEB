@@ -8,7 +8,8 @@ import org.apache.commons.cli.*;
 
 public class GrepController {
     public static void main(String[] args) {
-        Options options = new OptionsCreator().optionsCreate(new Options());
+        Options options = new OptionsCreator().getOptions();
+
         try {
             CommandLine commandLine = new DefaultParser().parse(options, args);
             if (commandLine.hasOption("h") || commandLine.hasOption("help")) {
