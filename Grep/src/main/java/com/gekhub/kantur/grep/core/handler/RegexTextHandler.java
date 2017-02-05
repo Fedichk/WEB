@@ -13,6 +13,6 @@ public class RegexTextHandler implements TextHandler {
 
     @Override
     public String handling(String text) throws SourceLoadingException {
-        return new TextHandlingUtil().toString(text, args);
+        return new TextHandlingUtil().starsAdding(new TextHandlingUtil().textFiltering(text, args),args);
     }
 }

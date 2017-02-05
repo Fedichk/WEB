@@ -9,22 +9,42 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextHandlingUtil {
-    public String toString(String text, String args) throws SourceLoadingException {
+
+    public String textFiltering(String text, String args) {
         StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new StringReader(text))) {
-            String line;
-            Pattern pattern = Pattern.compile(args.toLowerCase());
+        BufferedReader reader = new BufferedReader(new StringReader(text));
+        String line;
+        Pattern pattern = Pattern.compile(args.toLowerCase());
+        try {
             while ((line = reader.readLine()) != null) {
                 Matcher matcher = pattern.matcher(line.toLowerCase());
                 if (matcher.find()) {
                     content.append(args).append(System.getProperty("line.separator"));
+                    content.append(line).append(System.getProperty("line.separator"));
+                }
+            }
+        } catch (IOException e) {
+            new SourceLoadingException(e);
+        }
+        return String.valueOf(content);
+    }
+
+    public String starsAdding(String text, String args) {
+        StringBuilder content = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new StringReader(text));
+        String line;
+        Pattern pattern = Pattern.compile(args.toLowerCase());
+        try {
+            while ((line = reader.readLine()) != null) {
+                Matcher matcher = pattern.matcher(line.toLowerCase());
+                if (matcher.find()) {
                     content.append(line.replace(args, "*" + args + "*")).
                             append(System.getProperty("line.separator")
                             );
                 }
             }
         } catch (IOException e) {
-            throw new SourceLoadingException(e);
+            new SourceLoadingException(e);
         }
         return String.valueOf(content);
     }
