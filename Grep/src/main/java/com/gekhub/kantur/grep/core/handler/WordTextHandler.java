@@ -6,6 +6,7 @@ import com.gekhub.kantur.grep.util.TextHandlingUtil;
 public class WordTextHandler implements TextHandler {
 
     private String args;
+    private TextHandlingUtil textHandlingUtil = new TextHandlingUtil();
 
     public WordTextHandler(String args) {
         this.args = args;
@@ -13,6 +14,7 @@ public class WordTextHandler implements TextHandler {
 
     @Override
     public String handling(String text) throws SourceLoadingException {
-        return new TextHandlingUtil().starsAdding(new TextHandlingUtil().textFiltering(text, args),args);
+        String filtredText = textHandlingUtil.textFiltering(text, args);
+        return new TextHandlingUtil().starsAdding(filtredText, args);
     }
 }
