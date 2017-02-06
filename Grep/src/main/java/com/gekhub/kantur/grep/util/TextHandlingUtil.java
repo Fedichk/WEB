@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class TextHandlingUtil {
 
-    public String textFiltering(String text, String args) {
+    public String filterText(String text, String args) {
         StringBuilder content = new StringBuilder();
         BufferedReader reader = new BufferedReader(new StringReader(text));
         String line;
@@ -29,7 +29,7 @@ public class TextHandlingUtil {
         return String.valueOf(content);
     }
 
-    public String starsAdding(String text, String args) {
+    public String addStars(String text, String args) {
         StringBuilder content = new StringBuilder();
         BufferedReader reader = new BufferedReader(new StringReader(text));
         String line;

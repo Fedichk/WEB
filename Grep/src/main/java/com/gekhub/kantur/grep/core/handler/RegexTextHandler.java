@@ -1,6 +1,5 @@
 package com.gekhub.kantur.grep.core.handler;
 
-import com.gekhub.kantur.grep.core.source.SourceLoadingException;
 import com.gekhub.kantur.grep.util.TextHandlingUtil;
 
 public class RegexTextHandler implements TextHandler {
@@ -13,8 +12,8 @@ public class RegexTextHandler implements TextHandler {
     }
 
     @Override
-    public String handling(String text) throws SourceLoadingException {
-        String filtredText = textHandlingUtil.textFiltering(text, args);
-        return new TextHandlingUtil().starsAdding(filtredText, args);
+    public String handling(String text) {
+        String filtredText = textHandlingUtil.filterText(text, args);
+        return new TextHandlingUtil().addStars(filtredText, args);
     }
 }

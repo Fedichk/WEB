@@ -11,7 +11,7 @@ import org.apache.commons.cli.CommandLine;
 
 public class OptionsParser {
 
-    public SourceProvider sourceParse(CommandLine commandLine) throws SourceLoadingException {
+    public SourceProvider parseSource(CommandLine commandLine) throws SourceLoadingException {
         if (commandLine.hasOption("f") || commandLine.hasOption("file")) {
             return new FileSourceProvider(commandLine.getOptionValue("f"));
         } else if (commandLine.hasOption("u") || commandLine.hasOption("url")) {
@@ -20,7 +20,7 @@ public class OptionsParser {
         return null;
     }
 
-    public TextHandler argumentsParse(CommandLine commandLine) {
+    public TextHandler parseArgument(CommandLine commandLine) {
         if (commandLine.hasOption("r") || commandLine.hasOption("regex")) {
             return new RegexTextHandler(commandLine.getOptionValue("r"));
         } else if (commandLine.hasOption("w") || commandLine.hasOption("word")) {
